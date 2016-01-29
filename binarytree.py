@@ -44,7 +44,7 @@ class BinaryTreeNode:
         # left tree values < right tree values
         # so check nodes to make sure they are smaller than ancestor on right
         # keep track of lower bound and upper bound that node must be in
-        stack = [(root, -9999999, 9999999)]
+        stack = [(tree_root, -9999999, 9999999)]
         # DFS
         while len(stack):
             node, lower_bound, upper_bound = stack.pop()
@@ -59,4 +59,36 @@ class BinaryTreeNode:
                 stack.append((node.right, node.value, upper_bound))
 
         return True
+
+    def find_largest(tree_root):
+        # find the largest value in a BST
+        # should walk down right side to get largest value
+        current = tree_root
+        while current:
+            if not current.right:
+                return current
+            current = current.right
+
+    def find_2nd_largest(tree_root):
+        if not(tree_root.left or tree_root.right):
+            raise Exception("Not a tree")
+
+        current = tree_root
+
+        while current:
+            # 3 different cases for 2nd largest
+            # has left subtree only, so current is largest
+            # 2nd largest is largest in left tree
+            if current.left and not current.right:
+                return find_largest(current.left)
+
+            # case: there is right child but right child has no children
+            # largest must be on right, then current is 2nd largest
+            if current.right and not current.left.right and not current.right.right:
+                return current.value
+
+            # case: there is a right subtree with children, so largest and 2nd largest must be in there 
+            current = current.right
+
+
 
