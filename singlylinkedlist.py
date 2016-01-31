@@ -4,6 +4,7 @@
 # if node.next = b, node.next = node.next.next
 # oh nvm only have information about reference to node we want to delete
 
+
 def delete_node(node_to_delete):
     # get the next node from input
     next_node = node_to_delete.next
@@ -15,5 +16,38 @@ def delete_node(node_to_delete):
     else:
         raise Exception("can't delete the last node")
 
-# this might have dangling nodes
 
+# this might have dangling nodes
+# check for cycles
+
+
+def contains_cycle(first_node):
+    #  check 2 ahead and then compare
+    current = first_node
+    ahead = first_node
+
+    while ahead is not None and ahead.next is not None:
+        current = current.next
+        ahead = ahead.next.next
+
+        if ahead == current:
+            return True
+
+    return False
+
+
+def reverse(first_node):
+    # reverse in place linked list
+    # going through from tail to end isn't effective, want O(n) sol'n
+    # change next pointer of each node to previous
+    current_node = first_node
+    previous_node = None
+    next_node = None
+    while current_node:
+        next_node = current_node.next
+        current_node.next = previous_node
+        # step forward
+        previous_node = current_node
+        current_node = next_node
+
+    return previous_node
