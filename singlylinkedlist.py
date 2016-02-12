@@ -51,3 +51,19 @@ def reverse(first_node):
         current_node = next_node
 
     return previous_node
+
+
+def kth_node(first_node, k):
+    # find the kth to last node
+    ahead_node = first_node
+    current_node = first_node
+    # make ahead_node k - 1 ahead
+    for i in xrange(k-1):
+        if not ahead_node.next:
+            raise LookupError("K is longest than list")
+        ahead_node = ahead_node.next
+    # step the nodes forward until right node hits the end of the list
+    while ahead_node:
+        current_node.next
+        ahead_node.next
+    return current_node
